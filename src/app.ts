@@ -1,3 +1,7 @@
+import { createServer } from "http";
+import { envs } from "./config/plugins";
+import { Server } from "./presentation/server";
+import { AppRoutes } from "./presentation/routes";
 
 ( () => {
 
@@ -6,5 +10,19 @@
 
 function main() {
 
-    console.log( 'Hello world!' );
+    const server = new Server({
+        port: envs.PORT,
+    });
+
+    const httpServer = createServer( server.app );
+    // WssService.initWss({ 
+    //     server: httpServer,
+    // });
+
+    server.setRoutes( AppRoutes.routes );
+
+    httpServer.listen( envs.PORT, () => {
+        
+        console.log(`Server running on port ${ envs.PORT }`);
+    });
 };
