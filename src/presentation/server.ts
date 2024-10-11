@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import path from 'path';
+import http from 'http';
 
 interface Options {
     port: number;
@@ -11,7 +12,7 @@ export class Server {
     public readonly app = express();
     private readonly port: number;
     private readonly publicPath: string;
-    private serverListener?: any;
+    private serverListener?: http.Server;
 
     constructor( options: Options ){
 
