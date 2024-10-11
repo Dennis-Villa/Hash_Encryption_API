@@ -1,6 +1,6 @@
-import express, { Router } from 'express';
 import path from 'path';
 import http from 'http';
+import { ExpressAdapter, Router } from '../config';
 
 interface Options {
     port: number;
@@ -9,7 +9,7 @@ interface Options {
 
 export class Server {
 
-    public readonly app = express();
+    public readonly app = ExpressAdapter.createServer();
     private readonly port: number;
     private readonly publicPath: string;
     private serverListener?: http.Server;
@@ -27,11 +27,11 @@ export class Server {
     private configure() {
 
         //* Middlewares
-        this.app.use( express.json() );
-        this.app.use( express.urlencoded({ extended: true }) );
+        this.app.use( ExpressAdapter.jsonParserMiddleware() );
+        this.app.use( ExpressAdapter.urlencodedParserMiddleware({ extended: true }) );
 
         //* Public Folder
-        this.app.use( express.static( this.publicPath ) );
+        this.app.use( ExpressAdapter.staticMiddleware( this.publicPath ) );
 
         //* SPA
         this.app.get( /^\/(?!api).*/, ( request, response ) => {

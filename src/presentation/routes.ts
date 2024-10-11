@@ -1,4 +1,5 @@
-import { Router } from "express";
+import { Router } from '../config';
+import { AlgorithmRoutes } from './algorithm/routes';
 
 export class AppRoutes {
 
@@ -6,8 +7,7 @@ export class AppRoutes {
 
         const router = Router();
     
-        //todo
-        // router.use('/api/',  );
+        router.use('/api/algorithm', AlgorithmRoutes.routes );
 
         return router;
     };
