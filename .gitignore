@@ -1,11 +1,11 @@
-node_modules/*
+node_modules/
 
 dist/*
 
-coverage/*
+coverage/
 
 */**/*.log
-*/**/logs/
+logs/
 
 .env
 .env.test
