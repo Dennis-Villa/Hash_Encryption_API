@@ -1,0 +1,20 @@
+{
+  "name": "hash_encryption_api",
+  "version": "1.0.0",
+  "description": "An API to handle the detection, encryption and decryption of messages and files using various algorithms.",
+  "main": "app.js",
+  "scripts": {
+    "dev": "tsnd --respawn --clear src/app.ts",
+    "build": "rimraf ./dist && tsc",
+    "start": "npm run build && node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dennis Villavicencio",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.3",
+    "ts-node-dev": "^2.0.0"
+  }
+}
