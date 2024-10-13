@@ -4,7 +4,7 @@ import { AlgorithmService } from '../services/algorithm.service';
 export class AlgorithmController {
 
     constructor(
-        private readonly algorithmService = new AlgorithmService(),
+        private readonly algorithmService: AlgorithmService,
     ) {};
 
     public getAlgorithms = async( request: Request, response: Response ) => {
