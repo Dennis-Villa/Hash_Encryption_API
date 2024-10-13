@@ -9,6 +9,7 @@ export class AlgorithmRoutes {
         const algorithmController = new AlgorithmController()
 
         router.get('/', algorithmController.getAlgorithms );
+        router.get('/names', algorithmController.getAlgorithmsNames );
 
         return router;
     };

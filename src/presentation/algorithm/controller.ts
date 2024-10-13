@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response } from '../../config';
 import { AlgorithmService } from '../services/algorithm.service';
 
 export class AlgorithmController {
@@ -9,6 +9,13 @@ export class AlgorithmController {
 
     public getAlgorithms = async( request: Request, response: Response ) => {
 
-        response.json( 'Get Algorithms' );
+        this.algorithmService.getAll()
+            .then( algorithms => response.status( 200 ).json({ algorithms }));
+    };
+
+    public getAlgorithmsNames = async( request: Request, response: Response ) => {
+
+        this.algorithmService.getNames()
+            .then( names => response.status( 200 ).json({ algorithmNames: names }));
     };
 }
