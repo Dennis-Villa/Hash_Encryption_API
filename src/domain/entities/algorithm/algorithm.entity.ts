@@ -18,14 +18,14 @@ export enum AsymmetricCypherType {
 export interface AlgorithmEntityOptions {
    name: string;
    keyType: AlgorithmKeyType;
-   cypherType: SymmetricCypherType | AsymmetricCypherType;
+   cypherType: SymmetricCypherType[] | AsymmetricCypherType[];
 };
 
 export class AlgorithmEntity {
 
     public readonly name: string;
     public readonly keyType: AlgorithmKeyType;
-    public readonly cypherType: SymmetricCypherType | AsymmetricCypherType;
+    public readonly cypherType: SymmetricCypherType[] | AsymmetricCypherType[];
 
     constructor( options: AlgorithmEntityOptions ) {
 
@@ -55,14 +55,15 @@ export class AlgorithmEntity {
     };
 
     private checkCypherType( 
-        keyType: AlgorithmKeyType, cypherType: SymmetricCypherType | AsymmetricCypherType 
+        keyType: AlgorithmKeyType, cypherType: SymmetricCypherType[] | AsymmetricCypherType[]
     ): boolean {
 
         if ( keyType === AlgorithmKeyType.symmetric ){
 
+            if ( cypherType  )
             if ( 
-                ( cypherType !== SymmetricCypherType.block ) 
-                && ( cypherType !== SymmetricCypherType.stream ) 
+                ( !cypherType.includes( SymmetricCypherType.block as never ) ) 
+                && ( !cypherType.includes( SymmetricCypherType.stream as never ) ) 
             ){
 
                 throw CustomError.badRequest( 'Cypher must be a valid symmetric key type' );
@@ -71,8 +72,8 @@ export class AlgorithmEntity {
         else if ( keyType === AlgorithmKeyType.asymmetric ){
 
             if ( 
-                ( cypherType !== AsymmetricCypherType.pubKey ) 
-                && ( cypherType !== AsymmetricCypherType.signature ) 
+                ( !cypherType.includes( AsymmetricCypherType.pubKey as never ) ) 
+                && ( !cypherType.includes( AsymmetricCypherType.pubKey as never ) ) 
             ){
 
                 throw CustomError.badRequest( 'Cypher must be a valid asymmetric key type' );

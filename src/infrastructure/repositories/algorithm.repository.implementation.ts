@@ -31,13 +31,13 @@ export class AlgorithmRepositoryImplementation implements AlgorithmRepository {
         return this.datasource.getByName( name );
     };
 
-    getByKeyType(keyType: AlgorithmKeyType): Promise<AlgorithmEntity[]> {
+    getByKeyType( keyType: string ): Promise<AlgorithmEntity[]> {
         
-        return this.datasource.getByKeyType( keyType );
+        return this.datasource.getByKeyType( keyType as AlgorithmKeyType );
     };
 
-    getByCypherType(cypherType: SymmetricCypherType | AsymmetricCypherType): Promise<AlgorithmEntity[]> {
+    getByCypherType( cypherType: string[] ): Promise<AlgorithmEntity[]> {
         
-        return this.datasource.getByCypherType( cypherType );
+        return this.datasource.getByCypherType( cypherType as AsymmetricCypherType[] | SymmetricCypherType[] );
     };
 };

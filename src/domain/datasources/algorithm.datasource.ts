@@ -14,5 +14,5 @@ export abstract class AlgorithmDatasource {
 
     abstract getByKeyType( keyType: AlgorithmKeyType ): Promise<AlgorithmEntity[]>;
 
-    abstract getByCypherType( cypherType: AsymmetricCypherType | SymmetricCypherType ): Promise<AlgorithmEntity[]>;
+    abstract getByCypherType( cypherType: AsymmetricCypherType[] | SymmetricCypherType[] ): Promise<AlgorithmEntity[]>;
 };

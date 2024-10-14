@@ -19,6 +19,8 @@ export class AlgorithmRoutes {
         router.get('/', algorithmController.getAlgorithms );
         router.get('/names', algorithmController.getAlgorithmsNames );
 
+        router.post('/cypher', algorithmController.getAlgorithmsByCypher );
+
         return router;
     };
 };

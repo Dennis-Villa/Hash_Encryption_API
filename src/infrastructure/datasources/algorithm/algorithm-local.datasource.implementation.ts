@@ -43,7 +43,7 @@ export class AlgorithmLocalDatasourceImplementation implements AlgorithmDatasour
     async getByKeyType( keyType: AlgorithmKeyType ): Promise<AlgorithmEntity[]> {
 
         const algorithms = AlgorithmsSpecifications.filter( algorithm => algorithm.keyType === keyType );
-        if( !algorithms ) throw CustomError.notFound( "Algorithm keyType not found" );
+        if( algorithms.length === 0 ) throw CustomError.notFound( "Algorithm keyType not found" );
 
         return algorithms.map( algorithm => {
 
@@ -51,10 +51,20 @@ export class AlgorithmLocalDatasourceImplementation implements AlgorithmDatasour
         });
     };
 
-    async getByCypherType( cypherType: AsymmetricCypherType | SymmetricCypherType ): Promise<AlgorithmEntity[]> {
+    async getByCypherType( cypherType: AsymmetricCypherType[] | SymmetricCypherType[] ): Promise<AlgorithmEntity[]> {
         
-        const algorithms = AlgorithmsSpecifications.filter( algorithm => algorithm.cypherType === cypherType );
-        if( !algorithms ) throw CustomError.notFound( "Algorithm cypherType not found" );
+        
+        const algorithms = AlgorithmsSpecifications.filter( algorithm => {
+
+            for (let index = 0; index < cypherType.length; index++) {
+                
+                const element = cypherType.at( index )!;
+                if ( !algorithm.cypherType.includes( element ) ) return false;
+            };
+
+            return true;
+        });
+        if( algorithms.length === 0 ) throw CustomError.notFound( "Algorithm cypherType not found" );
 
         return algorithms.map( algorithm => {
 

@@ -19,26 +19,26 @@ export class AlgorithmService {
 
     getKeyTypes(): Promise<string[]> {
         
-        throw new Error( 'Not implemented' );
+        return this.algorithmRepositoryImplementation.getAllKeyTypes();
     };
 
     getCypherTypes(): Promise<string[]> {
         
-        throw new Error( 'Not implemented' );
+        return this.algorithmRepositoryImplementation.getAllCypherTypes();
     };
 
     getByName( name: string ): Promise<AlgorithmEntity> {
         
-        throw new Error( 'Not implemented' );
+        return this.algorithmRepositoryImplementation.getByName( name );
     };
 
     getByKeyType( keyType: string ): Promise<AlgorithmEntity[]> {
         
-        throw new Error( 'Not implemented' );
+        return this.algorithmRepositoryImplementation.getByKeyType( keyType );
     };
 
-    getByCypherType( cypherType: string ): Promise<AlgorithmEntity[]> {
+    getByCypherType( cypherType: string[] ): Promise<AlgorithmEntity[]> {
         
-        throw new Error( 'Not implemented' );
+        return this.algorithmRepositoryImplementation.getByCypherType( cypherType );
     };
 };

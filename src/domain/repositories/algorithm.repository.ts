@@ -12,8 +12,8 @@ export abstract class AlgorithmRepository {
 
     abstract getByName( name: string ): Promise<AlgorithmEntity>;
 
-    abstract getByKeyType( keyType: AlgorithmKeyType ): Promise<AlgorithmEntity[]>;
+    abstract getByKeyType( keyType: string ): Promise<AlgorithmEntity[]>;
 
-    abstract getByCypherType( cypherType: SymmetricCypherType | AsymmetricCypherType ): Promise<AlgorithmEntity[]>;
+    abstract getByCypherType( cypherType: string[] ): Promise<AlgorithmEntity[]>;
 
 };
