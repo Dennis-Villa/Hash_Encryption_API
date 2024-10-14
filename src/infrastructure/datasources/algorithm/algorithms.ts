@@ -10,4 +10,34 @@ export const AlgorithmsSpecifications = [
         keyType: 'ASYMMETRIC',
         cypherType: 'SIGNATURE',
     },
+    {
+        name: 'RSA',
+        keyType: 'ASYMMETRIC',
+        cypherType: 'PUBKEY', // and SIGNATURE
+    },
+    {
+        name: 'EdDSA',
+        keyType: 'ASYMMETRIC',
+        cypherType: 'PUBKEY', // and SIGNATURE
+    },
+    {
+        name: 'Blowfish',
+        keyType: 'SYMMETRIC',
+        cypherType: 'BLOCK',
+    },
+    {
+        name: 'AES',
+        keyType: 'SYMMETRIC',
+        cypherType: 'BLOCK',
+    },
+    {
+        name: 'ChaCha',
+        keyType: 'SYMMETRIC',
+        cypherType: 'STREAM',
+    },
+    {
+        name: 'RC4',
+        keyType: 'SYMMETRIC',
+        cypherType: 'STREAM',
+    },
 ];
