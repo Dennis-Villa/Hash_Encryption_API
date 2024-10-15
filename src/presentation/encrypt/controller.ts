@@ -1,5 +1,5 @@
 import { Request, Response } from '../../config';
-import { CustomError } from '../../domain';
+import { CustomError, EncryptMessageDto } from '../../domain';
 import { EncryptService } from '../services/encrypt.service';
 
 export class EncryptController {
@@ -22,7 +22,10 @@ export class EncryptController {
 
     public encryptMessage = async( request: Request, response: Response ) => {
 
-        this.encryptService.encryptMessage()
+        const [ error, createTodoDto ] = EncryptMessageDto.create( request.body );
+        if ( !!error ) response.status(400).json({ error });
+
+        this.encryptService.encryptMessage( createTodoDto! )
             .then( hash => response.status( 200 ).json({ hash }))
             .catch( ( error ) => this.handleError( error, response ) );
     };

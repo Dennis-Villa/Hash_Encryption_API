@@ -1,11 +1,12 @@
-import { AlgorithmEntity } from "../../domain";
+import { EncryptMessage, EncryptMessageDto } from "../../domain";
 
 export class EncryptService {
 
     constructor() {};
 
-    public async encryptMessage(): Promise<string> {
+    public async encryptMessage( encryptMessageDto: EncryptMessageDto ): Promise<string> {
 
-        throw new Error( "Not implemented" );
+        return new EncryptMessage()
+            .execute( encryptMessageDto );
     };
 };
