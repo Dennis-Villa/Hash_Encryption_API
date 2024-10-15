@@ -1,2 +1,2 @@
 
-export * from './envs.adapter';
+export * from './envs.plugin';
