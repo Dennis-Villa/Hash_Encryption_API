@@ -18,8 +18,12 @@ export class AlgorithmRoutes {
 
         router.get('/', algorithmController.getAlgorithms );
         router.get('/names', algorithmController.getAlgorithmsNames );
+        router.get('/keys', algorithmController.getAlgorithmsKeyTypes );
+        router.get('/cyphers', algorithmController.getAlgorithmsCypherTypes );
 
-        router.post('/cypher', algorithmController.getAlgorithmsByCypher );
+        router.get('/name', algorithmController.getAlgorithmsByName );
+        router.get('/key', algorithmController.getAlgorithmsByKey );
+        router.get('/cypher', algorithmController.getAlgorithmsByCypher );
 
         return router;
     };

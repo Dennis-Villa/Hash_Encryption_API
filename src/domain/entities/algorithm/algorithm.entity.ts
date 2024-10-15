@@ -54,16 +54,13 @@ export class AlgorithmEntity {
         return true;
     };
 
-    private checkCypherType( 
-        keyType: AlgorithmKeyType, cypherType: SymmetricCypherType[] | AsymmetricCypherType[]
-    ): boolean {
+    private checkCypherType( keyType: string, cypherType: string[] ): boolean {
 
         if ( keyType === AlgorithmKeyType.symmetric ){
 
-            if ( cypherType  )
             if ( 
-                ( !cypherType.includes( SymmetricCypherType.block as never ) ) 
-                && ( !cypherType.includes( SymmetricCypherType.stream as never ) ) 
+                ( !cypherType.includes( SymmetricCypherType.block ) ) 
+                && ( !cypherType.includes( SymmetricCypherType.stream ) ) 
             ){
 
                 throw CustomError.badRequest( 'Cypher must be a valid symmetric key type' );
@@ -72,8 +69,8 @@ export class AlgorithmEntity {
         else if ( keyType === AlgorithmKeyType.asymmetric ){
 
             if ( 
-                ( !cypherType.includes( AsymmetricCypherType.pubKey as never ) ) 
-                && ( !cypherType.includes( AsymmetricCypherType.pubKey as never ) ) 
+                ( !cypherType.includes( AsymmetricCypherType.pubKey ) ) 
+                && ( !cypherType.includes( AsymmetricCypherType.signature ) ) 
             ){
 
                 throw CustomError.badRequest( 'Cypher must be a valid asymmetric key type' );

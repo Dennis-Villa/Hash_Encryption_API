@@ -1,5 +1,6 @@
 import { Router } from '../config';
 import { AlgorithmRoutes } from './algorithm/routes';
+import { EncryptRoutes } from './encrypt/routes';
 
 export class AppRoutes {
 
@@ -8,6 +9,7 @@ export class AppRoutes {
         const router = Router();
     
         router.use('/api/algorithm', AlgorithmRoutes.routes );
+        router.use('/api/encrypt', EncryptRoutes.routes );
 
         return router;
     };
