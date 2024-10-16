@@ -7,6 +7,11 @@ export class AlgorithmService {
         private readonly algorithmRepositoryImplementation: AlgorithmRepositoryImplementation,
     ) {};
 
+    verifyNameExists( name: string ): Promise<boolean> {
+        
+        return this.algorithmRepositoryImplementation.verifyNameExist( name );
+    };
+
     public async getAll(): Promise<AlgorithmEntity[]> {
 
         return this.algorithmRepositoryImplementation.getAllEntities();

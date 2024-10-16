@@ -32,6 +32,13 @@ export class AlgorithmLocalDatasourceImplementation implements AlgorithmDatasour
         ];
     };
 
+    async verifyNameExist( name: string ): Promise<boolean> {
+        
+        const algorithm = AlgorithmsSpecifications.find( algorithm => algorithm.name === name );
+
+        return !!algorithm;
+    };
+
     async getByName( name: string ): Promise<AlgorithmEntity> {
         
         const algorithm = AlgorithmsSpecifications.find( algorithm => algorithm.name === name );

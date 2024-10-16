@@ -1,6 +1,6 @@
 import path from 'path';
 import http from 'http';
-import { ExpressAdapter, Router } from '../config';
+import { ExpressAdapter, FileUploadAdapter, Router } from '../config';
 
 interface Options {
     port: number;
@@ -29,6 +29,7 @@ export class Server {
         //* Middlewares
         this.app.use( ExpressAdapter.jsonParserMiddleware() );
         this.app.use( ExpressAdapter.urlencodedParserMiddleware({ extended: true }) );
+        this.app.use( FileUploadAdapter.createWithMaxSize() );
 
         //* Public Folder
         this.app.use( ExpressAdapter.staticMiddleware( this.publicPath ) );

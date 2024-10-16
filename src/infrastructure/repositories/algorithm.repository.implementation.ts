@@ -26,6 +26,11 @@ export class AlgorithmRepositoryImplementation implements AlgorithmRepository {
         return this.datasource.getAllCypherTypes();
     };
 
+    verifyNameExist( name: string ): Promise<boolean> {
+        
+        return this.datasource.verifyNameExist( name );
+    };
+
     getByName(name: string): Promise<AlgorithmEntity> {
         
         return this.datasource.getByName( name );

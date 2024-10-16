@@ -1,5 +1,5 @@
 import { Request, Response } from '../../config';
-import { CustomError, EncryptMessageDto } from '../../domain';
+import { CustomError, EncryptMessageDto, HashMessageDto, HashFileDto } from '../../domain';
 import { EncryptService } from '../services/encrypt.service';
 
 export class EncryptController {
@@ -26,6 +26,26 @@ export class EncryptController {
         if ( !!error ) response.status(400).json({ error });
 
         this.encryptService.encryptMessage( createTodoDto! )
+            .then( hash => response.status( 200 ).json({ hash }))
+            .catch( ( error ) => this.handleError( error, response ) );
+    };
+
+    public calculateHashMessage = async( request: Request, response: Response ) => {
+
+        const [ error, hashMessageDto ] = HashMessageDto.create( request.body );
+        if ( !!error ) response.status(400).json({ error });
+
+        this.encryptService.calculateHashMessage( hashMessageDto! )
+            .then( hash => response.status( 200 ).json({ hash }))
+            .catch( ( error ) => this.handleError( error, response ) );
+    };
+
+    public calculateHashFile = async( request: Request, response: Response ) => {
+
+        const [ error, hashFileDto ] = HashFileDto.create( request.body );
+        if ( !!error ) response.status(400).json({ error });
+
+        this.encryptService.calculateHashFile( hashFileDto! )
             .then( hash => response.status( 200 ).json({ hash }))
             .catch( ( error ) => this.handleError( error, response ) );
     };

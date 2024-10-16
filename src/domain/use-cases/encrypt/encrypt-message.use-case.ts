@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { EncryptMessageDto } from "../../dtos";
 
 export interface EncryptMessageUseCase {
@@ -9,8 +10,10 @@ export class EncryptMessage implements EncryptMessageUseCase {
     
     constructor(){};
 
-    execute( dto: EncryptMessageDto ): Promise<string> {
-        
-        throw new Error( "Not implemented" );
+    async execute( dto: EncryptMessageDto ): Promise<string> {
+
+        const { message, algorithm, key } = dto;
+
+        return crypto.createHmac( algorithm, key ).update( message ).digest('hex');
     };
 };

@@ -10,6 +10,8 @@ export abstract class AlgorithmDatasource {
 
     abstract getAllCypherTypes(): Promise<string[]>;
 
+    abstract verifyNameExist( name: string ): Promise<boolean>;
+
     abstract getByName( name: string ): Promise<AlgorithmEntity>;
 
     abstract getByKeyType( keyType: AlgorithmKeyType ): Promise<AlgorithmEntity[]>;
