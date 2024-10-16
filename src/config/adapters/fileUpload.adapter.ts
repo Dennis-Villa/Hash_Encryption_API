@@ -3,11 +3,12 @@ export { UploadedFile } from 'express-fileupload';
 
 export class FileUploadAdapter {
     
-    static createWithMaxSize( fileSize: number = 3 * 1024 * 1024 ) {
+    static createWithMaxSize( fileSize: number = 3145728 ) {
 
         return fileUpload({
             useTempFiles : true,
             tempFileDir : '/tmp/',
+            abortOnLimit: true,
             limits: {
                 fileSize,
             },

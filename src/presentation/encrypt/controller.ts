@@ -23,7 +23,11 @@ export class EncryptController {
     public encryptMessage = async( request: Request, response: Response ) => {
 
         const [ error, createTodoDto ] = EncryptMessageDto.create( request.body );
-        if ( !!error ) response.status(400).json({ error });
+        if ( !!error ){ 
+
+            response.status(400).json({ error });
+            return;
+        };
 
         this.encryptService.encryptMessage( createTodoDto! )
             .then( hash => response.status( 200 ).json({ hash }))
@@ -33,7 +37,11 @@ export class EncryptController {
     public calculateHashMessage = async( request: Request, response: Response ) => {
 
         const [ error, hashMessageDto ] = HashMessageDto.create( request.body );
-        if ( !!error ) response.status(400).json({ error });
+        if ( !!error ){ 
+
+            response.status(400).json({ error });
+            return;
+        };
 
         this.encryptService.calculateHashMessage( hashMessageDto! )
             .then( hash => response.status( 200 ).json({ hash }))
@@ -43,7 +51,11 @@ export class EncryptController {
     public calculateHashFile = async( request: Request, response: Response ) => {
 
         const [ error, hashFileDto ] = HashFileDto.create( request.body );
-        if ( !!error ) response.status(400).json({ error });
+        if ( !!error ){ 
+
+            response.status(400).json({ error });
+            return;
+        };
 
         this.encryptService.calculateHashFile( hashFileDto! )
             .then( hash => response.status( 200 ).json({ hash }))

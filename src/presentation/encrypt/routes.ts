@@ -18,12 +18,12 @@ export class EncryptRoutes {
         const encryptController = new EncryptController( encryptService );
 
         router.post( '/message', encryptController.encryptMessage );
+        //todo router.post( '/keys',  ); Generar llave publica y privada
         router.post( '/hash/message', encryptController.calculateHashMessage );
-
         router.post( 
             '/hash/file', 
-            FileUploadMiddleware.containFiles  as RequestHandler,
-            encryptController.calculateHashFile 
+            FileUploadMiddleware.containFiles as RequestHandler,
+            encryptController.calculateHashFile,
         );
 
         return router;
