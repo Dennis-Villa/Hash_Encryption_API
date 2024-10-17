@@ -18,7 +18,12 @@ export class EncryptRoutes {
         const encryptController = new EncryptController( encryptService );
 
         router.post( '/message', encryptController.encryptMessage );
-        //todo router.post( '/keys',  ); Generar llave publica y privada
+
+        //todo Add the rest of properties in crypto.generateKeyPairSync
+        router.post( '/keys', encryptController.generateKeyPair );
+        // todo router.post( '/private-key',  );
+        // todo router.post( '/public-key',  );
+        
         router.post( '/hash/message', encryptController.calculateHashMessage );
         router.post( 
             '/hash/file', 

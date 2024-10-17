@@ -1,5 +1,5 @@
 import { Request, Response } from '../../config';
-import { CustomError, EncryptMessageDto, HashMessageDto, HashFileDto } from '../../domain';
+import { CustomError, EncryptMessageDto, HashMessageDto, HashFileDto, GenerateKeyPairsDto } from '../../domain';
 import { EncryptService } from '../services/encrypt.service';
 
 export class EncryptController {
@@ -31,6 +31,20 @@ export class EncryptController {
 
         this.encryptService.encryptMessage( createTodoDto! )
             .then( hash => response.status( 200 ).json({ hash }))
+            .catch( ( error ) => this.handleError( error, response ) );
+    };
+    
+    public generateKeyPair = async( request: Request, response: Response ) => {
+
+        const [ error, generateKeyPairsDto ] = GenerateKeyPairsDto.create( request.body );
+        if ( !!error ){ 
+
+            response.status(400).json({ error });
+            return;
+        };
+
+        this.encryptService.generateKeyPair( generateKeyPairsDto! )
+            .then( keys => response.status( 200 ).json({ ...keys }))
             .catch( ( error ) => this.handleError( error, response ) );
     };
 
