@@ -17,18 +17,20 @@ export class TransformKeyFile implements TransformKeyFileUseCase {
         const { publicKey, privateKey } = keys;
 
         const files = [];
-        const fileNames = [ 'publicKey.key', 'privateKey.key' ];
+        const fileNames = [];
 
         if( !!publicKey ) {
 
             if( typeof publicKey !== 'string' ) throw CustomError.badRequest( 'Key must be pem formatted to generate a file' );
             files.push( publicKey );
+            fileNames.push( 'publicKey.key' );
         };
 
         if( !!privateKey ) {
             
             if( typeof privateKey !== 'string' ) throw CustomError.badRequest( 'Key must be pem formatted to generate a file' );
             files.push( privateKey );
+            fileNames.push( 'privateKey.key' );
         };
 
         await ZipAdapter.responseZip( files, fileNames, 'keys.zip', response );

@@ -21,7 +21,7 @@ export class EncryptRoutes {
 
         //todo Add the rest of properties in crypto.generateKeyPairSync
         router.post( '/keys', encryptController.generateKeyPair );
-        // todo router.post( '/private-key',  );
+        router.post( '/private-key', encryptController.generatePrivateKey );
         // todo router.post( '/public-key',  );
 
         router.post( '/hash/message', encryptController.calculateHashMessage );
