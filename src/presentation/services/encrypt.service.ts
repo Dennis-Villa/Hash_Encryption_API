@@ -1,5 +1,5 @@
 import { Response } from "../../config";
-import { CustomError, EncryptMessage, EncryptMessageDto, HashMessage, HashMessageDto, HashFileDto, HashFile, GenerateKeyPairsDto, GenerateKeyPairs, GeneratePrivateKeyDto, GeneratePrivateKey } from "../../domain";
+import { CustomError, EncryptMessage, EncryptMessageDto, HashMessage, HashMessageDto, HashFileDto, HashFile, GenerateKeyPairsDto, GenerateKeyPairs, GeneratePrivateKeyDto, GeneratePrivateKey, GeneratePublicKey, GeneratePublicKeyDto } from "../../domain";
 import { TransformKeyFile } from "../../domain/use-cases/encrypt/transform-key-file.use-case";
 import { AlgorithmService } from './algorithm.service';
 
@@ -48,6 +48,23 @@ export class EncryptService {
 
         const keys = await new GeneratePrivateKey()
             .execute( generatePrivateKeyDto );
+
+        await new TransformKeyFile()
+            .execute( keys, response );
+
+        return;
+    };
+
+    public async generatePublicKey( generatePublicKeyDto: GeneratePublicKeyDto ): Promise<{ [ key: string ]: any }> {
+
+        return await new GeneratePublicKey()
+            .execute( generatePublicKeyDto );
+    };
+
+    public async generatePublicKeyFile( generatePublicKeyDto: GeneratePublicKeyDto, response: Response ): Promise<void> {
+
+        const keys = await new GeneratePublicKey()
+            .execute( generatePublicKeyDto );
 
         await new TransformKeyFile()
             .execute( keys, response );

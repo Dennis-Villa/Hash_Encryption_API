@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { Request, Response } from '../../config';
-import { CustomError, EncryptMessageDto, HashMessageDto, HashFileDto, GenerateKeyPairsDto, GeneratePrivateKeyDto } from '../../domain';
+import { CustomError, EncryptMessageDto, HashMessageDto, HashFileDto, GenerateKeyPairsDto, GeneratePrivateKeyDto, GeneratePublicKeyDto } from '../../domain';
 import { EncryptService } from '../services/encrypt.service';
 
 export class EncryptController {
@@ -81,6 +81,31 @@ export class EncryptController {
         };
 
         this.encryptService.generatePrivateKey( generatePrivateKeyDto! )
+            .then( keys => response.status( 200 ).json({ ...keys }))
+            .catch( ( error ) => this.handleError( error, response ) );
+    };
+
+    public generatePublicKey = async( request: Request, response: Response ) => {
+
+        const [ error, generatePublicKeyDto ] = GeneratePublicKeyDto.create( request.body );
+        if ( !!error ){ 
+
+            response.status(400).json({ error });
+            return;
+        };
+
+        const { returnFile } = generatePublicKeyDto!;
+
+        if ( returnFile ) {
+
+            this.encryptService.generatePublicKeyFile( generatePublicKeyDto!, response )
+                .then()
+                .catch( ( error ) => this.handleError( error, response ) );
+            
+            return;
+        };
+
+        this.encryptService.generatePublicKey( generatePublicKeyDto! )
             .then( keys => response.status( 200 ).json({ ...keys }))
             .catch( ( error ) => this.handleError( error, response ) );
     };

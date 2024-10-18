@@ -22,7 +22,11 @@ export class EncryptRoutes {
         //todo Add the rest of properties in crypto.generateKeyPairSync
         router.post( '/keys', encryptController.generateKeyPair );
         router.post( '/private-key', encryptController.generatePrivateKey );
-        // todo router.post( '/public-key',  );
+        router.post( 
+            '/public-key', 
+            FileUploadMiddleware.containFiles as RequestHandler,
+            encryptController.generatePublicKey,
+        );
 
         router.post( '/hash/message', encryptController.calculateHashMessage );
         router.post( 

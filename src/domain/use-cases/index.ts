@@ -4,3 +4,4 @@ export * from './encrypt/hash-message.use-case';
 export * from './encrypt/hash-file.use-case';
 export * from './encrypt/generate-key-pairs.use-case';
 export * from './encrypt/generate-private-key.use-case';
+export * from './encrypt/generate-public-key.use-case';
