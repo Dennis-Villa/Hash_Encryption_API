@@ -12,6 +12,7 @@
   "author": "Dennis Villavicencio",
   "license": "ISC",
   "devDependencies": {
+    "@types/archiver": "^6.0.2",
     "@types/express": "^5.0.0",
     "@types/express-fileupload": "^1.5.1",
     "@types/node": "^22.7.5",
@@ -20,9 +21,11 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "archiver": "^7.0.1",
     "dotenv": "^16.4.5",
     "env-var": "^7.5.0",
     "express": "^4.21.1",
-    "express-fileupload": "^1.5.1"
+    "express-fileupload": "^1.5.1",
+    "jszip": "^3.10.1"
   }
 }

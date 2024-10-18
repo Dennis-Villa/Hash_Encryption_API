@@ -1,6 +1,8 @@
+import { Response } from "../../config";
 import { CustomError, EncryptMessage, EncryptMessageDto, HashMessage, HashMessageDto, HashFileDto, HashFile, GenerateKeyPairsDto, GenerateKeyPairs } from "../../domain";
 import { TransformKeyFile } from "../../domain/use-cases/encrypt/transform-key-file.use-case";
 import { AlgorithmService } from './algorithm.service';
+import fs from 'fs';
 
 export class EncryptService {
 
@@ -22,15 +24,21 @@ export class EncryptService {
 
     public async generateKeyPair( generateKeyPairsDto: GenerateKeyPairsDto ): Promise<{ [ key: string ]: any }> {
 
-        const keys = new GenerateKeyPairs()
-            .execute( generateKeyPairsDto )
-            .then( keys => {
+        const { returnFile } = generateKeyPairsDto;
 
-                new TransformKeyFile().execute( keys );
-                return keys;
-            });
+        return await new GenerateKeyPairs()
+            .execute( generateKeyPairsDto );
+    };
 
-        return keys;
+    public async generateKeyPairFile( generateKeyPairsDto: GenerateKeyPairsDto, response: Response ): Promise<void> {
+
+        const keys = await new GenerateKeyPairs()
+            .execute( generateKeyPairsDto );
+
+        await new TransformKeyFile()
+            .execute( keys, response );
+
+        return;
     };
 
     public async calculateHashMessage( hashMessageDto: HashMessageDto ): Promise<string> {

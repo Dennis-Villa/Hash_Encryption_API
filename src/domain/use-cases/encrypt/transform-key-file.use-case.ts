@@ -1,43 +1,36 @@
-import { KeyObject } from 'crypto';
-import fs from 'fs';
+import { CustomError } from '../../errors/custom.error';
+import { Response, ZipAdapter } from '../../../config';
 
 type Keys = { [ key: string ]: any };
 
 export interface TransformKeyFileUseCase {
 
-    execute( keys: Keys ): Promise<any>;
+    execute( keys: Keys, response: Response ): Promise<void>;
 };
 
 export class TransformKeyFile implements TransformKeyFileUseCase {
     
     constructor(){};
 
-    async execute( keys: Keys ): Promise<any> {
+    async execute( keys: Keys, response: any ): Promise<void> {
 
-        const { 
-            publicKey
-        } = keys;
+        const { publicKey, privateKey } = keys;
 
-        if( typeof publicKey === 'string' ) {
+        const files = [];
+        const fileNames = [ 'publicKey.key', 'privateKey.key' ];
 
-            const tempPath = fs.mkdtempSync( 'temp', { encoding: 'utf-8' } );
-            fs.writeFileSync( `${ tempPath }/publicKey.key`, publicKey );
+        if( !!publicKey ) {
 
-            console.log( fs.readFileSync( `${ tempPath }/publicKey.key`, { encoding: 'utf-8' } ) );
-
-            fs.rmSync( tempPath, { recursive: true } );
+            if( typeof publicKey !== 'string' ) throw CustomError.badRequest( 'Key must be pem formatted to generate a file' );
+            files.push( publicKey );
         };
 
-        fs.writeFileSync( 'Buffer', `${publicKey}`);
-
-        if( Buffer.isBuffer( publicKey ) ) {
-
-            const tempPath = fs.mkdtempSync( 'temp', { encoding: 'utf-8' } );
-            fs.writeFileSync( `${ tempPath }/publicKey.key`, Buffer.from( publicKey ) );
-
-            console.log( fs.readFileSync( `${ tempPath }/publicKey.key`, { encoding: 'hex' } ) );
-
-            fs.rmSync( tempPath, { recursive: true } );
+        if( !!privateKey ) {
+            
+            if( typeof privateKey !== 'string' ) throw CustomError.badRequest( 'Key must be pem formatted to generate a file' );
+            files.push( privateKey );
         };
+
+        await ZipAdapter.responseZip( files, fileNames, 'keys.zip', response );
     };
 };

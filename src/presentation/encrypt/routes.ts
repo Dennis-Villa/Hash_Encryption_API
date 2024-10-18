@@ -23,7 +23,7 @@ export class EncryptRoutes {
         router.post( '/keys', encryptController.generateKeyPair );
         // todo router.post( '/private-key',  );
         // todo router.post( '/public-key',  );
-        
+
         router.post( '/hash/message', encryptController.calculateHashMessage );
         router.post( 
             '/hash/file', 

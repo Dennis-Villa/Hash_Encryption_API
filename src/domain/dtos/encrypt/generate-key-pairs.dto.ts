@@ -31,6 +31,7 @@ export enum PrivateTypes {
 export class GenerateKeyPairsDto {
 
     private constructor(
+        public readonly returnFile: boolean,
         public readonly algorithm: ValidAlgorithms,
         public readonly modulusLength: number,
         public readonly format: ValidFormats,
@@ -51,8 +52,10 @@ export class GenerateKeyPairsDto {
             passphrase = undefined 
         } = props;
 
-        let { cipher = 'aes-256-cbc' } = props;
+        let { returnFile = false, cipher = 'aes-256-cbc' } = props;
         if( !passphrase ) cipher = undefined;
+
+        returnFile = ( String( returnFile ).trim() === 'true');
 
         if( !Object.values( ValidAlgorithms ).includes( algorithm ) ) return [
             `The parameter 'algorithm' must be a supported algorithm type. Received '${ algorithm }'`
@@ -72,7 +75,7 @@ export class GenerateKeyPairsDto {
         ];
 
         return [ undefined, new GenerateKeyPairsDto( 
-            algorithm, Number(modulusLength), format, publicType, privateType, cipher, passphrase 
+            returnFile, algorithm, Number(modulusLength), format, publicType, privateType, cipher, passphrase 
         )];
     };
 };
