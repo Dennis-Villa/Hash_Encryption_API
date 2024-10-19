@@ -18,16 +18,6 @@ export class EncryptRoutes {
         const encryptController = new EncryptController( encryptService );
 
         router.post( '/message', encryptController.encryptMessage );
-
-        //todo Add the rest of properties in crypto.generateKeyPairSync
-        router.post( '/keys', encryptController.generateKeyPair );
-        router.post( '/private-key', encryptController.generatePrivateKey );
-        router.post( 
-            '/public-key', 
-            FileUploadMiddleware.containFiles as RequestHandler,
-            encryptController.generatePublicKey,
-        );
-
         router.post( '/hash/message', encryptController.calculateHashMessage );
         router.post( 
             '/hash/file', 

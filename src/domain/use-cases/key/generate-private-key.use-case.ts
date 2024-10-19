@@ -1,5 +1,5 @@
 import crypto, { KeyObject } from 'crypto';
-import { GenerateKeyPairsDto } from '../../dtos/encrypt/generate-key-pairs.dto';
+import { GenerateKeyPairsDto } from '../../dtos/key/generate-key-pairs.dto';
 import { CustomError } from '../../errors/custom.error';
 import { GeneratePrivateKeyDto } from '../../dtos';
 
