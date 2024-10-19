@@ -51,7 +51,11 @@ export class AlgorithmController {
     public getAlgorithmsByName = async( request: Request, response: Response ) => {
 
         const { value } = request.query;
-        if( !value ) response.status( 400 ).json({ error: 'No name provided' });
+        if( !value ) {
+
+            response.status( 400 ).json({ error: 'No name provided' });
+            return;
+        };
 
         this.algorithmService.getByName( String( value ) )
             .then( algorithm => response.status( 200 ).json({ algorithm }))
@@ -61,7 +65,11 @@ export class AlgorithmController {
     public getAlgorithmsByKey = async( request: Request, response: Response ) => {
 
         const { value } = request.query;
-        if( !value ) response.status( 400 ).json({ error: 'No key provided' });
+        if( !value ) {
+
+            response.status( 400 ).json({ error: 'No key provided' });
+            return;
+        };
 
         this.algorithmService.getByKeyType( String( value ) )
             .then( algorithm => response.status( 200 ).json({ algorithm }))
@@ -71,7 +79,11 @@ export class AlgorithmController {
     public getAlgorithmsByCypher = async( request: Request, response: Response ) => {
 
         const { values } = request.query;
-        if( !values ) response.status( 400 ).json({ error: 'No cypher provided' });
+        if( !values ) {
+
+            response.status( 400 ).json({ error: 'No cypher provided' });
+            return;
+        };
 
         const cyphers = String( values ).split( ',' );
 
