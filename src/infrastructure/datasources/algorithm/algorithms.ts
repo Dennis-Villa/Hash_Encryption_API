@@ -1,43 +1,62 @@
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Algorithm:
+ *       type: object
+ *       properties:
+ *         name: 
+ *           type: string
+ *         keyType: 
+ *           type: string
+ *         cipherType:
+ *           type: string
+ *       example:
+ *          name: md5
+ *          keyType: ASYMMETRIC
+ *          cipherType: SIGNATURE
+ *         
+ */
 
 export const AlgorithmsSpecifications = [
     {
         name: 'md5',
         keyType: 'ASYMMETRIC',
-        cypherType: [ 'SIGNATURE' ],
+        cipherType: [ 'SIGNATURE' ],
     },
     {
         name: 'sha1',
         keyType: 'ASYMMETRIC',
-        cypherType: [ 'SIGNATURE' ],
+        cipherType: [ 'SIGNATURE' ],
     },
     {
         name: 'RSA',
         keyType: 'ASYMMETRIC',
-        cypherType: [ 'PUBKEY', 'SIGNATURE' ],
+        cipherType: [ 'PUBKEY', 'SIGNATURE' ],
     },
     {
         name: 'EdDSA',
         keyType: 'ASYMMETRIC',
-        cypherType: [ 'PUBKEY', 'SIGNATURE' ],
+        cipherType: [ 'PUBKEY', 'SIGNATURE' ],
     },
     {
         name: 'Blowfish',
         keyType: 'SYMMETRIC',
-        cypherType: [ 'BLOCK' ],
+        cipherType: [ 'BLOCK' ],
     },
     {
         name: 'AES',
         keyType: 'SYMMETRIC',
-        cypherType: [ 'BLOCK' ],
+        cipherType: [ 'BLOCK' ],
     },
     {
         name: 'ChaCha',
         keyType: 'SYMMETRIC',
-        cypherType: [ 'STREAM' ],
+        cipherType: [ 'STREAM' ],
     },
     {
         name: 'RC4',
         keyType: 'SYMMETRIC',
-        cypherType: [ 'STREAM' ],
+        cipherType: [ 'STREAM' ],
     },
 ];

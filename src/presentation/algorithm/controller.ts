@@ -12,7 +12,7 @@ export class AlgorithmController {
 
         if ( error instanceof CustomError ) {
         
-            return response.status( error.statusCode ).json( error.message );
+            return response.status( error.statusCode ).json({ error: error.message });
         };
 
         return response.status( 500 ).json({ 
@@ -37,14 +37,14 @@ export class AlgorithmController {
     public getAlgorithmsKeyTypes = async( request: Request, response: Response ) => {
 
         this.algorithmService.getKeyTypes()
-            .then( names => response.status( 200 ).json({ algorithmNames: names }))
+            .then( types => response.status( 200 ).json({ algorithmKeyTypes: types }))
             .catch( ( error ) => this.handleError( error, response ) );
     };
 
-    public getAlgorithmsCypherTypes = async( request: Request, response: Response ) => {
+    public getAlgorithmsCipherTypes = async( request: Request, response: Response ) => {
 
-        this.algorithmService.getCypherTypes()
-            .then( names => response.status( 200 ).json({ algorithmNames: names }))
+        this.algorithmService.getCipherTypes()
+            .then( types => response.status( 200 ).json({ algorithCipherTypes: types }))
             .catch( ( error ) => this.handleError( error, response ) );
     };
 
@@ -72,11 +72,11 @@ export class AlgorithmController {
         };
 
         this.algorithmService.getByKeyType( String( value ) )
-            .then( algorithm => response.status( 200 ).json({ algorithm }))
+            .then( algorithms => response.status( 200 ).json({ algorithms }))
             .catch( ( error ) => this.handleError( error, response ) );
     };
 
-    public getAlgorithmsByCypher = async( request: Request, response: Response ) => {
+    public getAlgorithmsByCipher = async( request: Request, response: Response ) => {
 
         const { values } = request.query;
         if( !values ) {
@@ -85,10 +85,10 @@ export class AlgorithmController {
             return;
         };
 
-        const cyphers = String( values ).split( ',' );
+        const ciphers = String( values ).split( ',' );
 
-        this.algorithmService.getByCypherType( cyphers )
-            .then( algorithm => response.status( 200 ).json({ algorithm }))
+        this.algorithmService.getByCipherType( ciphers )
+            .then( algorithms => response.status( 200 ).json({ algorithms }))
             .catch( ( error ) => this.handleError( error, response ) );
     };
 }

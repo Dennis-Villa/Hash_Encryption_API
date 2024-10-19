@@ -1,4 +1,4 @@
-import { AlgorithmDatasource, AlgorithmEntity, AlgorithmKeyType, AlgorithmRepository, AsymmetricCypherType, SymmetricCypherType } from "../../domain";
+import { AlgorithmDatasource, AlgorithmEntity, AlgorithmKeyType, AlgorithmRepository, AsymmetricCipherType, SymmetricCipherType } from "../../domain";
 
 export class AlgorithmRepositoryImplementation implements AlgorithmRepository {
 
@@ -21,9 +21,9 @@ export class AlgorithmRepositoryImplementation implements AlgorithmRepository {
         return this.datasource.getAllKeyTypes();
     };
 
-    getAllCypherTypes(): Promise<string[]> {
+    getAllCipherTypes(): Promise<string[]> {
         
-        return this.datasource.getAllCypherTypes();
+        return this.datasource.getAllCipherTypes();
     };
 
     verifyNameExist( name: string ): Promise<boolean> {
@@ -41,8 +41,8 @@ export class AlgorithmRepositoryImplementation implements AlgorithmRepository {
         return this.datasource.getByKeyType( keyType as AlgorithmKeyType );
     };
 
-    getByCypherType( cypherType: string[] ): Promise<AlgorithmEntity[]> {
+    getByCipherType( cipherType: string[] ): Promise<AlgorithmEntity[]> {
         
-        return this.datasource.getByCypherType( cypherType as AsymmetricCypherType[] | SymmetricCypherType[] );
+        return this.datasource.getByCipherType( cipherType as AsymmetricCipherType[] | SymmetricCipherType[] );
     };
 };
