@@ -1,12 +1,13 @@
-import { UploadedFile } from "../../../config";
-import { PublicTypes, ValidFormats } from "./generate-key-pairs.dto";
 import fs from 'fs';
+import { UploadedFile } from "../../../config";
+import { PublicTypes } from "./generate-key-pairs.dto";
 
 interface Props {
     file: UploadedFile;
-    format?: ValidFormats;
     type?: PublicTypes;
-    encoding?: string;
+    encoding?: BufferEncoding;
+    cipher?: string;
+    passphrase?: string;
     returnFile?: boolean;
 };
 
@@ -15,38 +16,37 @@ export class GeneratePublicKeyDto {
     private constructor(
         public readonly returnFile: boolean,
         public readonly key: string,
-        public readonly format: "pem" | "der" | "jwk",
         public readonly type: PublicTypes,
-        public readonly encoding: string,
+        public readonly cipher?: string,
+        public readonly passphrase?: string,
     ){};
 
     static create( props: Props): [ string?, GeneratePublicKeyDto? ] {
 
         const { 
             file,
-            format = ValidFormats.pem, 
             type = PublicTypes.spki,
             encoding = 'utf-8',
+            passphrase = undefined,
         } = props;
-
         let { returnFile = false } = props;
+
+        let cipher = props.cipher || 'aes-256-cbc' || undefined;
+        if( !passphrase ) cipher = undefined;
 
         returnFile = ( String( returnFile ).trim() === 'true');
 
-        if( !Object.values( ValidFormats ).includes( format ) ) return [
-            `The parameter 'format' must be a supported format type. Received '${ format }'`
-        ];
         if( !Object.values( PublicTypes ).includes( type ) ) return [
             `The parameter 'type' must be a supported Public Key encoding. Received '${ type }'`
         ];
 
         if( !file ) return [
-            'The parameter \'file\' is required'
+            'The Private Key file is required'
         ];
-        const key = fs.readFileSync( file.tempFilePath, { encoding: 'utf-8' } );
+        const key = fs.readFileSync( file.tempFilePath, { encoding } );
 
         return [ undefined, new GeneratePublicKeyDto( 
-            returnFile, key, format, type, encoding
+            returnFile, key, type, cipher, passphrase,
         )];
     };
 };

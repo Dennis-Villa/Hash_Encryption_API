@@ -13,22 +13,12 @@ export class GeneratePublicKey implements GeneratePublicKeyUseCase {
 
     async execute( dto: GeneratePublicKeyDto ): Promise<{ publicKey: KeyObject } | any> {
 
-        const { format, type, encoding } = dto;
+        const { key, type, cipher, passphrase, } = dto;
 
         try {
 
-            // const publicKey = crypto.createPublicKey({
-            //     key, 
-            //     format, 
-            //     type, 
-            //     encoding,
-            // });
 
-            const key = "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIFCBNFQNaEq0bRs4GZKSM01sexqysuNNWJBCR5lkZ4hv\n-----END PRIVATE KEY-----\n";
-
-            const publicKey = crypto.createPublicKey( key ).export({ format: 'pem', type });
-
-            console.log( publicKey );
+            const publicKey = crypto.createPublicKey( key ).export({ format: 'pem', type, cipher, passphrase });
 
             return { publicKey };
         }
