@@ -11,8 +11,8 @@ export class EncryptMessageDto {
 
         const { message, algorithm, key = '' } = props;
 
-        if ( !message ) return ['Message property is required'];
-        if ( !algorithm ) return ['Algorithm property is required'];
+        if ( !message ) return ['message property is required'];
+        if ( !algorithm ) return ['algorithm property is required'];
 
         return [ undefined, new EncryptMessageDto( message, algorithm, key ) ];
     };

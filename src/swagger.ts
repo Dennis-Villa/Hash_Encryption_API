@@ -8,7 +8,7 @@ const options = {
     openapi: '3.0.0',
     info: { 
       title: 'Hash Encryption API', 
-      version: '1.0.0',
+      version: '0.5.0',
       description: 
         'An API to handle the detection, encryption and decryption of messages and files using various algorithms.',
       license: {

@@ -7,10 +7,13 @@
  *       properties:
  *         name: 
  *           type: string
+ *           readOnly: true
  *         keyType: 
  *           type: string
+ *           readOnly: true
  *         cipherType:
  *           type: string
+ *           readOnly: true
  *       example:
  *          name: md5
  *          keyType: ASYMMETRIC

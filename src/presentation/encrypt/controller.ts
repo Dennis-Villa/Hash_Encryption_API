@@ -13,7 +13,7 @@ export class EncryptController {
 
         if ( error instanceof CustomError ) {
         
-            return response.status( error.statusCode ).json( error.message );
+            return response.status( error.statusCode ).json({error: error.message });
         };
 
         return response.status( 500 ).json({ 
