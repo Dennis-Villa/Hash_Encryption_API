@@ -25,7 +25,7 @@ export enum PublicTypes {
 export enum PrivateTypes {
     pkcs1   = 'pkcs1',
     pkcs8   = 'pkcs8',
-    sec1    = 'sec1',
+    // sec1    = 'sec1',
 };
 
 export class GenerateKeyPairsDto {
