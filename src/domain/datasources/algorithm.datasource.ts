@@ -1,4 +1,4 @@
-import { AlgorithmEntity, AlgorithmKeyType, AsymmetricCypherType, SymmetricCypherType } from "../entities";
+import { AlgorithmEntity, AlgorithmKeyType, AsymmetricCipherType, SymmetricCipherType } from "../entities";
 
 export abstract class AlgorithmDatasource {
     
@@ -8,7 +8,7 @@ export abstract class AlgorithmDatasource {
 
     abstract getAllKeyTypes(): Promise<string[]>;
 
-    abstract getAllCypherTypes(): Promise<string[]>;
+    abstract getAllCipherTypes(): Promise<string[]>;
 
     abstract verifyNameExist( name: string ): Promise<boolean>;
 
@@ -16,5 +16,5 @@ export abstract class AlgorithmDatasource {
 
     abstract getByKeyType( keyType: AlgorithmKeyType ): Promise<AlgorithmEntity[]>;
 
-    abstract getByCypherType( cypherType: AsymmetricCypherType[] | SymmetricCypherType[] ): Promise<AlgorithmEntity[]>;
+    abstract getByCipherType( cipherType: AsymmetricCipherType[] | SymmetricCipherType[] ): Promise<AlgorithmEntity[]>;
 };

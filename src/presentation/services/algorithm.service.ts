@@ -27,9 +27,9 @@ export class AlgorithmService {
         return this.algorithmRepositoryImplementation.getAllKeyTypes();
     };
 
-    getCypherTypes(): Promise<string[]> {
+    getCipherTypes(): Promise<string[]> {
         
-        return this.algorithmRepositoryImplementation.getAllCypherTypes();
+        return this.algorithmRepositoryImplementation.getAllCipherTypes();
     };
 
     getByName( name: string ): Promise<AlgorithmEntity> {
@@ -42,8 +42,8 @@ export class AlgorithmService {
         return this.algorithmRepositoryImplementation.getByKeyType( keyType );
     };
 
-    getByCypherType( cypherType: string[] ): Promise<AlgorithmEntity[]> {
+    getByCipherType( cipherType: string[] ): Promise<AlgorithmEntity[]> {
         
-        return this.algorithmRepositoryImplementation.getByCypherType( cypherType );
+        return this.algorithmRepositoryImplementation.getByCipherType( cipherType );
     };
 };

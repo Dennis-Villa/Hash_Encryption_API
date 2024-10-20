@@ -1,5 +1,6 @@
 import express from 'express';
-export { Router, Request, Response, NextFunction, RequestHandler } from 'express';
+export { Router, Request, Response, NextFunction, RequestHandler, Express } from 'express';
+
 
 export const ExpressAdapter = {
     createServer: express,

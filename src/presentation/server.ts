@@ -4,6 +4,7 @@ import { ExpressAdapter, FileUploadAdapter, Router } from '../config';
 
 interface Options {
     port: number;
+    web_service_url?: string;
     public_path?: string;
     max_file_size?: number;
 };
@@ -35,14 +36,14 @@ export class Server {
         this.app.use( FileUploadAdapter.createWithMaxSize( this.maxFileSize ) );
 
         //* Public Folder
-        this.app.use( ExpressAdapter.staticMiddleware( this.publicPath ) );
+        // this.app.use( ExpressAdapter.staticMiddleware( this.publicPath ) );
 
         //* SPA
-        this.app.get( /^\/(?!api).*/, ( request, response ) => {
+        // this.app.get( /^\/(?!api).*/, ( request, response ) => {
 
-            const indexPath = path.join( __dirname + `../../../${ this.publicPath }/index.html` );
-            response.sendFile( indexPath );
-        });
+        //     const indexPath = path.join( __dirname + `../../../${ this.publicPath }/index.html` );
+        //     response.sendFile( indexPath );
+        // });
     };
 
     public setRoutes( router: Router ) {

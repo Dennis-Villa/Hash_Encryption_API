@@ -1,4 +1,4 @@
-import { AlgorithmDatasource, AlgorithmEntity, AlgorithmKeyType, AsymmetricCypherType, SymmetricCypherType } from "../../../domain";
+import { AlgorithmDatasource, AlgorithmEntity, AlgorithmKeyType, AsymmetricCipherType, SymmetricCipherType } from "../../../domain";
 import { CustomError } from "../../../domain/errors/custom.error";
 import { AlgorithmsSpecifications } from "./algorithms";
 
@@ -24,11 +24,11 @@ export class AlgorithmLocalDatasourceImplementation implements AlgorithmDatasour
         return Object.values( AlgorithmKeyType );
     };
 
-    async getAllCypherTypes(): Promise<string[]> {
+    async getAllCipherTypes(): Promise<string[]> {
 
         return [
-            ...Object.values( SymmetricCypherType ),
-            ...Object.values( AsymmetricCypherType ),
+            ...Object.values( SymmetricCipherType ),
+            ...Object.values( AsymmetricCipherType ),
         ];
     };
 
@@ -58,20 +58,20 @@ export class AlgorithmLocalDatasourceImplementation implements AlgorithmDatasour
         });
     };
 
-    async getByCypherType( cypherType: AsymmetricCypherType[] | SymmetricCypherType[] ): Promise<AlgorithmEntity[]> {
+    async getByCipherType( cipherType: AsymmetricCipherType[] | SymmetricCipherType[] ): Promise<AlgorithmEntity[]> {
         
         
         const algorithms = AlgorithmsSpecifications.filter( algorithm => {
 
-            for (let index = 0; index < cypherType.length; index++) {
+            for (let index = 0; index < cipherType.length; index++) {
                 
-                const element = cypherType.at( index )!;
-                if ( !algorithm.cypherType.includes( element ) ) return false;
+                const element = cipherType.at( index )!;
+                if ( !algorithm.cipherType.includes( element ) ) return false;
             };
 
             return true;
         });
-        if( algorithms.length === 0 ) throw CustomError.notFound( "Algorithm cypherType not found" );
+        if( algorithms.length === 0 ) throw CustomError.notFound( "Algorithm cipherType not found" );
 
         return algorithms.map( algorithm => {
 

@@ -19,7 +19,12 @@ export class AppRoutes {
 
         const algorithmRoutes = new AlgorithmRoutes( algorithmService ).routes;
         const encryptRoutes = new EncryptRoutes( algorithmService ).routes;
-    
+
+        router.get( '/', ( request, response ) => {
+
+            response.redirect( '/api/docs' );
+        });
+
         router.use('/api/algorithm', algorithmRoutes );
         router.use('/api/encrypt', encryptRoutes );
         router.use('/api/key', KeyRoutes.routes );

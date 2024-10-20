@@ -5,12 +5,12 @@ export enum AlgorithmKeyType {
     asymmetric = 'ASYMMETRIC',
 };
 
-export enum SymmetricCypherType {
+export enum SymmetricCipherType {
     block = 'BLOCK',
     stream = 'STREAM',
 };
 
-export enum AsymmetricCypherType {
+export enum AsymmetricCipherType {
     pubKey = 'PUBKEY',
     signature = 'SIGNATURE',
 };
@@ -18,30 +18,30 @@ export enum AsymmetricCypherType {
 export interface AlgorithmEntityOptions {
    name: string;
    keyType: AlgorithmKeyType;
-   cypherType: SymmetricCypherType[] | AsymmetricCypherType[];
+   cipherType: SymmetricCipherType[] | AsymmetricCipherType[];
 };
 
 export class AlgorithmEntity {
 
     public readonly name: string;
     public readonly keyType: AlgorithmKeyType;
-    public readonly cypherType: SymmetricCypherType[] | AsymmetricCypherType[];
+    public readonly cipherType: SymmetricCipherType[] | AsymmetricCipherType[];
 
     constructor( options: AlgorithmEntityOptions ) {
 
-        const { name, keyType, cypherType } = options;
+        const { name, keyType, cipherType } = options;
 
         if ( !name ) throw CustomError.badRequest( 'Algorithm name is required' );
 
         if ( !keyType ) throw CustomError.badRequest( 'Key type is required' );
         this.checkKeyType( keyType );
 
-        if ( !cypherType ) throw CustomError.badRequest( 'Cypher type is required' );
-        this.checkCypherType( keyType, cypherType );
+        if ( !cipherType ) throw CustomError.badRequest( 'Cipher type is required' );
+        this.checkCypherType( keyType, cipherType );
         
         this.name = name; 
         this.keyType = keyType; 
-        this.cypherType = cypherType; 
+        this.cipherType = cipherType; 
     };
 
     private checkKeyType( keyType: AlgorithmKeyType ): boolean {
@@ -54,26 +54,26 @@ export class AlgorithmEntity {
         return true;
     };
 
-    private checkCypherType( keyType: string, cypherType: string[] ): boolean {
+    private checkCypherType( keyType: string, cipherType: string[] ): boolean {
 
         if ( keyType === AlgorithmKeyType.symmetric ){
 
             if ( 
-                ( !cypherType.includes( SymmetricCypherType.block ) ) 
-                && ( !cypherType.includes( SymmetricCypherType.stream ) ) 
+                ( !cipherType.includes( SymmetricCipherType.block ) ) 
+                && ( !cipherType.includes( SymmetricCipherType.stream ) ) 
             ){
 
-                throw CustomError.badRequest( 'Cypher must be a valid symmetric key type' );
+                throw CustomError.badRequest( 'Cipher must be a valid symmetric key type' );
             };
         }
         else if ( keyType === AlgorithmKeyType.asymmetric ){
 
             if ( 
-                ( !cypherType.includes( AsymmetricCypherType.pubKey ) ) 
-                && ( !cypherType.includes( AsymmetricCypherType.signature ) ) 
+                ( !cipherType.includes( AsymmetricCipherType.pubKey ) ) 
+                && ( !cipherType.includes( AsymmetricCipherType.signature ) ) 
             ){
 
-                throw CustomError.badRequest( 'Cypher must be a valid asymmetric key type' );
+                throw CustomError.badRequest( 'Cipher must be a valid asymmetric key type' );
             };
         };
         
@@ -82,12 +82,12 @@ export class AlgorithmEntity {
 
     static fromObject( object: { [key: string]: any } ): AlgorithmEntity {
 
-        const { name, keyType, cypherType } = object;
+        const { name, keyType, cipherType } = object;
 
         const algorithm = new AlgorithmEntity({ 
             name,
             keyType,
-            cypherType,
+            cipherType,
         });
 
         return algorithm;
