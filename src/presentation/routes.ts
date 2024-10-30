@@ -2,6 +2,7 @@ import { Router } from '../config';
 import { AlgorithmLocalDatasourceImplementation } from '../infrastructure/datasources/algorithm/algorithm-local.datasource.implementation';
 import { AlgorithmRepositoryImplementation } from '../infrastructure/repositories/algorithm.repository.implementation';
 import { AlgorithmRoutes } from './algorithm/routes';
+import { DecryptRoutes } from './decrypt/routes';
 import { EncryptRoutes } from './encrypt/routes';
 import { KeyRoutes } from './key/routes';
 import { AlgorithmService } from './services/algorithm.service';
@@ -27,6 +28,7 @@ export class AppRoutes {
 
         router.use('/api/algorithm', algorithmRoutes );
         router.use('/api/encrypt', encryptRoutes );
+        router.use('/api/decrypt', DecryptRoutes.routes );
         router.use('/api/key', KeyRoutes.routes );
 
         return router;
